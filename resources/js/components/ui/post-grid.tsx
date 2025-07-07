@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SectionHeader } from '@/components/ui/section-header';
-import { ArticleCard, ArticleProps } from '@/components/ui/article-card';
+import { ArticleCard } from '@/components/ui/article-card';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 

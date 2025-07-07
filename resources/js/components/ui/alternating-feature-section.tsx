@@ -1,6 +1,6 @@
 import React from 'react';
-import { InfoCard, InfoCardProps } from '@/components/ui/info-card';
-import { SectionHeader } from '@/components/ui/section-header';
+import { InfoCard } from '@/components/ui/info-card';
+// import { SectionHeader } from '@/components/ui/section-header';
 
 // Definisikan data dalam struktur yang jelas
 const featureData = [
