@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import React, { useState } from "react";
+import { SectionHeader } from "./section-header";
 
 // 1. Definisikan struktur data untuk setiap kategori
 const categories = {
@@ -31,16 +32,14 @@ export function TabbedFeatures() {
     const activeContent = categories[activeCategory];
 
     return (
-        <section className="w-full py-16 lg:py-24 bg-white">
+        <section className="w-full py-10 lg:py-24 bg-white">
             <div className="container mx-auto px-4 md:px-6 flex flex-col items-center">
                 {/* Judul dan Deskripsi */}
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                        Lorem Ipsum
-                    </h2>
-                    <p className="mt-3 text-lg text-muted-foreground">
-                        Deskripsi singkat tentang solusi yang ditawarkan.
-                    </p>
+                    <SectionHeader
+                    title="Lorem Ipsum"
+                    description="Fitur-fitur unggulan yang membantu sekolah Anda beroperasi lebih efisien."
+                />
                 </div>
 
                 {/* 3. Tombol Kategori (ToggleGroup) */}

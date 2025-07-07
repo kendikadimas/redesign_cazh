@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { CheckCircle2, School, BookOpen, Users, Utensils } from "lucide-react";
 import React from "react";
+import { SectionHeader } from "./section-header";
 
 // 1. Data tetap fokus pada fitur dan kegunaan
 const cardProducts = [
@@ -91,12 +92,10 @@ export function CardComparison() {
             <div className="container mx-auto px-4 md:px-6">
                 {/* Judul Seksi */}
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                        Perbandingan Produk Cards
-                    </h2>
-                    <p className="mt-2 text-lg text-muted-foreground">
-                        Temukan jenis kartu yang paling sesuai dengan kebutuhan Anda.
-                    </p>
+                    <SectionHeader
+                    title="Lorem Ipsum"
+                    description="Ini adalah deskripsi singkat yang menjelaskan tentang keseluruhan konten di bawah."
+                />
                 </div>
 
                 {/* 2. Layout Grid untuk menampilkan kartu secara vertikal */}

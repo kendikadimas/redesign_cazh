@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Package } from "lucide-react"; // Menggunakan ikon sebagai placeholder
 import React from "react";
+import { SectionHeader } from "./section-header";
 
 // Data untuk setiap kartu fitur, agar mudah dikelola
 const featuresData = [
@@ -35,12 +36,10 @@ export function FeaturesSection() {
             <div className="container mx-auto px-4 md:px-6">
                 {/* Judul Seksi */}
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                        Lorem Ipsum
-                    </h2>
-                    <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Ini adalah deskripsi singkat yang menjelaskan tentang keseluruhan fitur yang ditawarkan di bawah.
-                    </p>
+                   <SectionHeader
+                    title="Lorem Ipsum"
+                    description="Ini adalah deskripsi singkat yang menjelaskan tentang keseluruhan konten di bawah."
+                />
                 </div>
 
                 {/* Grid untuk Kartu Fitur */}
