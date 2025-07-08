@@ -33,6 +33,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+
+        if ($user->role === 'member') {
+            return redirect()->route('blog');
+        }
+
+        // Untuk admin & editor, arahkan ke intended URL atau dashboard
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
