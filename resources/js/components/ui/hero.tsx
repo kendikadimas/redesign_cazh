@@ -7,7 +7,7 @@
 
  export function Hero() {
   return (
-  <section className="py-12 md:py-24 lg:py-32 bg-gray-100">
+  <section className="py-12 md:py-24 lg:py-32 bg-[#00718F]">
     <div className="container mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between flex-col lg:flex-row gap-8 lg:gap-12">
     {/* Left Content */}
     <div className="text-center lg:text-left">

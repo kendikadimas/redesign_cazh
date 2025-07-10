@@ -96,9 +96,19 @@ Route::get('/produk/cards', function () {
     return Inertia::render('DetailCards');
 })->name('produk.cards');
 
+
 Route::get('/request-demo', function () {
     return Inertia::render('RequestDemo');
 })->name('demo.request');
+
+
+Route::get('/dashboard', function () {
+        // Jika user adalah admin, tampilkan DashboardAdmin
+        // if (auth()->user()->isAdmin()) {
+            return Inertia::render('DashboardAdmin');
+        // }
+        // return Inertia::render('Dashboard'); // Untuk user biasa
+    })->name('dashboard');
 
 
 require __DIR__ . '/settings.php';
