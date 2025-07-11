@@ -20,7 +20,8 @@ const NavLink = ({ href, active, children, badge }) => (
 
 export function Sidebar() {
     return (
-        <aside className="hidden w-64 flex-col border-r bg-primary text-primary-foreground md:flex">
+        <aside className="hidden w-64 flex-col border-r bg-[#00718F] text-primary-foreground md:flex">
+            <img src="/cards-logo.svg" alt="Cards Logo" className="w-25 h-10 mt-5 ml-5" />
             <div className="flex h-16 items-center border-b px-6">
                 <Link href="#" className="flex items-center gap-2 font-semibold">
                     <span>Admin Dashboard</span>
@@ -30,7 +31,7 @@ export function Sidebar() {
                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                     <LayoutDashboard className="h-4 w-4" /> Dashboard
                 </NavLink>
-                <NavLink href="#" active={false}>
+                <NavLink href={route('kelolaartikel')} active={route().current('kelolaartikel')}>
                     <FileText className="h-4 w-4" /> Kelola Artikel
                 </NavLink>
                 <NavLink href="#" active={false} badge="5">

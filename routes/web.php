@@ -12,7 +12,8 @@ $articles = [
         'category' => 'Administrasi',
         'published_date' => '1 Juli 2025',
         'image_url' => "https://via.placeholder.com/1200x675/a78bfa/ffffff?text=Manajemen+Sekolah",
-        'body_html' => '<h2>Subjudul Pertama</h2><p>Ini adalah paragraf pertama tentang manajemen sekolah. Mengelola sekolah secara efisien membutuhkan alat yang tepat...</p><p>Paragraf kedua berisi detail lebih lanjut.</p><ul><li>Poin pertama</li><li>Poin kedua</li></ul>'
+        'body_html' => '<h2>Subjudul Pertama</h2><p>Ini adalah paragraf pertama tentang manajemen sekolah. Mengelola sekolah secara efisien membutuhkan alat yang tepat...</p><p>Paragraf kedua berisi detail lebih lanjut.</p><ul><li>Poin pertama</li><li>Poin kedua</li></ul>',
+        'status' => 'Pending'
     ],
     [
         'id' => 2,
@@ -21,7 +22,8 @@ $articles = [
         'category' => 'Komunikasi',
         'published_date' => '2 Juli 2025',
         'image_url' => "https://via.placeholder.com/1200x675/60a5fa/ffffff?text=Komunikasi+Orang+Tua",
-        'body_html' => '<h2>Mengapa Penting?</h2><p>Keterlibatan orang tua adalah kunci keberhasilan siswa. Paragraf ini menjelaskan mengapa...</p>'
+        'body_html' => '<h2>Mengapa Penting?</h2><p>Keterlibatan orang tua adalah kunci keberhasilan siswa. Paragraf ini menjelaskan mengapa...</p>',
+        'status' => 'Pending'
     ],
     [
         'id' => 3,
@@ -30,7 +32,8 @@ $articles = [
         'category' => 'Teknologi',
         'published_date' => '3 Juli 2025',
         'image_url' => "https://via.placeholder.com/1200x675/f472b6/ffffff?text=Pembelajaran+Digital",
-        'body_html' => '<h2>Tren Teknologi</h2><p>Pembelajaran digital terus berkembang. Ini adalah beberapa tren yang perlu diperhatikan...</p>'
+        'body_html' => '<h2>Tren Teknologi</h2><p>Pembelajaran digital terus berkembang. Ini adalah beberapa tren yang perlu diperhatikan...</p>',
+        'status' => 'Pending'
     ],
 ];
 
@@ -109,6 +112,24 @@ Route::get('/dashboard', function () {
         // }
         // return Inertia::render('Dashboard'); // Untuk user biasa
     })->name('dashboard');
+
+Route::get('/management-articles', function () use ($articles) {
+        return Inertia::render('KelolaArtikel', [
+            'articles' => $articles
+        ]);
+    })->name('kelolaartikel');
+
+Route::get('/articles/{id}/review', function ($id) use ($articleCollection) {
+        $article = $articleCollection->firstWhere('id', (int)$id);
+
+        if (!$article) {
+            abort(404);
+        }
+
+        return Inertia::render('ReviewArtikel', [
+            'article' => $article
+        ]);
+    })->name('articles.review');
 
 
 require __DIR__ . '/settings.php';
