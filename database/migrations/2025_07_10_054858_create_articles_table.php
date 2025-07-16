@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('userid');
             $table->string('judul');
-            $table->string('gambar');
+            $table->string('gambar')->nullable();
             $table->string('konten');
-            $table->bigInteger('like');
-            $table->bigInteger('dislike');
+            $table->bigInteger('like')->defaultTo(0);
+            $table->bigInteger('dislike')->defaultTo(0);
             $table->timestamps();
 
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
