@@ -10,6 +10,13 @@ import { CategoryPieChart } from '@/components/ui/category-piechart'; // <-- Imp
 import { VisitsLineChart } from '@/components/ui/visits-line-chart'; // <-- Impor Line Chart
 
 
+interface DashboardProps {
+    totalartikel: number;
+    artikelpending: number;
+    artikelthismonth: number;
+    totalMember: number;
+}
+
 const ActivityItem = ({ icon, bgColor, text, time }) => (
     <div className="flex items-center gap-4">
         <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${bgColor} text-white`}>
@@ -22,7 +29,7 @@ const ActivityItem = ({ icon, bgColor, text, time }) => (
     </div>
 );
 
-export default function DashboardAdmin({ auth }) {
+export default function DashboardAdmin({ auth, totalartikel, artikelpending, artikelthismonth, totalMember }: DashboardProps) {
     return (
         <AdminLayout>
             <Head title="Dashboard Admin" />
@@ -31,10 +38,10 @@ export default function DashboardAdmin({ auth }) {
                 <main className="flex-1 p-6 space-y-6">
                     {/* Kartu Statistik */}
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                        <StatCard title="Total Artikel" value="{{ $totalartikel }}" icon={<File className="h-5 w-5 text-blue-600" />} iconBgClass="bg-blue-100" change="+20.1%" changeType="positive" />
-                        <StatCard title="Artikel Pending" value="5" icon={<Clock className="h-5 w-5 text-orange-600" />} iconBgClass="bg-orange-100" />
-                        <StatCard title="Artikel Bulan Ini" value="28" icon={<BarChart2 className="h-5 w-5 text-green-600" />} iconBgClass="bg-green-100" change="+12" changeType="positive" />
-                        <StatCard title="Total Member" value="67" icon={<Users className="h-5 w-5 text-purple-600" />} iconBgClass="bg-purple-100" change="-2" changeType="negative" />
+                        <StatCard title="Total Artikel" value={totalartikel}  icon={<File className="h-5 w-5 text-blue-600" />} iconBgClass="bg-blue-100" change="+20.1%" changeType="positive" />
+                        <StatCard title="Artikel Pending" value={artikelpending} icon={<Clock className="h-5 w-5 text-orange-600" />} iconBgClass="bg-orange-100" />
+                        <StatCard title="Artikel Bulan Ini" value={artikelthismonth} icon={<BarChart2 className="h-5 w-5 text-green-600" />} iconBgClass="bg-green-100" change="+12" changeType="positive" />
+                        <StatCard title="Total Member" value={totalMember} icon={<Users className="h-5 w-5 text-purple-600" />} iconBgClass="bg-purple-100" change="-2" changeType="negative" />
                     </div>
 
                     {/* Layout Grid 2x2 untuk Chart dan Aktivitas */}

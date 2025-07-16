@@ -31,9 +31,9 @@ const Index = () => {
             <LogoCarousel />
             <TabbedFeatures />
             <CardComparison />
-            <ImageTextSection />
-             <TwoColumnSection
-                    title="Judul Untuk Seksi Dua Kolom"
+            {/* <ImageTextSection /> */}
+             {/* <TwoColumnSection */}
+                    {/* title="Judul Untuk Seksi Dua Kolom"
                     description="Deskripsi mendalam tentang manfaat atau fitur yang ditawarkan, diletakkan di samping gambar yang relevan."
                     imageSrc="https://via.placeholder.com/600x400/a78bfa/ffffff?text=Image"
                     buttons={[
@@ -41,7 +41,7 @@ const Index = () => {
                         { text: 'Tombol Aksi 2', variant: 'secondary', href: '#' }
                     ]}
                     reverseOrder={false} // Atur ke true untuk membalik urutan kolom
-                />
+                /> */}
             <TestimonialsSection />
             <PromoBanner />
             <CtaBanner />

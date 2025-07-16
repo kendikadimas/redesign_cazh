@@ -17,9 +17,9 @@ class ArticleController extends Controller
     {
         // Mengambil semua artikel dengan paginasi dan memuat relasi author jika ada
         $articles = Article::latest()->paginate(10);
-
+    
         // Merender komponen Inertia dengan data artikel
-        return Inertia::render('Articles/Index', [
+        return Inertia::render('KelolaArtikel', [
             'articles' => $articles,
         ]);
     }
@@ -103,19 +103,80 @@ class ArticleController extends Controller
         return Redirect::back()->with('message', 'Artikel berhasil dihapus.');
     }
 
-    public function kelola(Article $article)
+    public function manageArticles()
     {
-        // $article otomatis di-resolve oleh Laravel (Route-Model Binding)
-
-        // Logika untuk mengambil "related articles", bisa berguna juga di halaman admin
-        $relatedArticles = Article::where('id', '!=', $article->id)
-            ->latest()
-            ->take(3)
-            ->get();
+        // Ambil semua artikel dengan eager loading penulisnya
+        $articles = article::with('user')
+                            ->orderBy('created_at', 'desc')
+                            ->get()
+                            ->map(function ($article) {
+                                return [
+                                    'id' => $article->id,
+                                    'title' => $article->judul,
+                                    'excerpt' => $article->excerpt, // Menggunakan accessor
+                                    'author' => $article->user->name ?? 'N/A', // Ambil nama penulis
+                                    'status' => ucfirst($article->status), // Pastikan status diawali huruf kapital
+                                    'date' => $article->formatted_date, // Menggunakan accessor
+                                ];
+                            });
 
         return Inertia::render('KelolaArtikel', [
-            'article' => $article,
-            'relatedArticles' => $relatedArticles,
+            'articles' => $articles,
         ]);
     }
+
+    /**
+     * Menampilkan halaman review artikel tunggal.
+     */
+    public function reviewArticle(article $article)
+    {
+        // Eager load user untuk mendapatkan nama penulis
+        $article->load('user');
+
+        // Format data artikel untuk tampilan React
+        $formattedArticle = [
+            'id' => $article->id,
+            'title' => $article->judul,
+            'category' => 'Uncategorized', // Asumsi kategori, sesuaikan jika ada kolom kategori
+            'author' => $article->user->name ?? 'N/A',
+            'date' => $article->formatted_date,
+            'image_url' => $article->gambar,
+            'body_html' => $article->konten, // Asumsi konten disimpan sebagai HTML
+            'status' => ucfirst($article->status),
+        ];
+
+        return Inertia::render('ReviewArtikel', [
+            'article' => $formattedArticle,
+        ]);
+    }
+
+    /**
+     * Mengubah status artikel menjadi 'Published'.
+     */
+    public function publishArticle(article $article)
+    {
+        $article->status = 'published';
+        $article->save();
+
+        return redirect()->back()->with('success', 'Artikel berhasil dipublikasikan!');
+    }
+
+    /**
+     * Mengubah status artikel menjadi 'Rejected'.
+     */
+    public function rejectArticle(Request $request, article $article)
+    {
+        $request->validate([
+            'reasons' => 'required|array',
+            'reasons.*' => 'string',
+        ]);
+
+        $article->status = 'rejected';
+        // Anda bisa menyimpan alasan penolakan di kolom terpisah jika ada, misal 'rejection_reasons'
+        // $article->rejection_reasons = json_encode($request->reasons);
+        $article->save();
+
+        return redirect()->back()->with('success', 'Artikel berhasil ditolak!');
+    }
+
 }

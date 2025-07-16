@@ -31,7 +31,7 @@ export function Sidebar() {
                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                     <LayoutDashboard className="h-4 w-4" /> Dashboard
                 </NavLink>
-                <NavLink href={route('kelolaartikel')} active={route().current('kelolaartikel')}>
+                <NavLink href={route('articles.index')} active={route().current('articles.index')}>
                     <FileText className="h-4 w-4" /> Kelola Artikel
                 </NavLink>
                 <NavLink href="#" active={false} badge="5">

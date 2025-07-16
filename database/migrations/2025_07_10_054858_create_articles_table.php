@@ -15,11 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('userid');
             $table->string('judul');
+            $table->string('slug');
+            $table->string('excerpt');
             $table->string('gambar')->nullable();
-            $table->string('konten');
-            $table->bigInteger('like')->defaultTo(0);
-            $table->bigInteger('dislike')->defaultTo(0);
+            $table->text('konten');
+            $table->bigInteger('like')->nullable();
+            $table->bigInteger('dislike')->nullable();
             $table->timestamps();
+            $table->enum('status', ['pending','terpublikasi','ditolak'])->defaultTo('pending');
 
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
         });

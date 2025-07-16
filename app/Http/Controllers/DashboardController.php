@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\article;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,6 +19,17 @@ class DashboardController extends Controller
     public function __invoke(): Response
     {
         $totalartikel = article::count();
-        return Inertia::render('DashboardAdmin', compact('totalartikel'));
+        $artikelpending = article::where('status', 'pending')->count();
+        $artikelthismonth = article::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)->count();
+        $totalMember = User::count();
+        
+        return Inertia::render('DashboardAdmin', 
+        [
+            'totalartikel'=> $totalartikel,
+            'artikelpending'=> $artikelpending,
+            'artikelthismonth'=> $artikelthismonth,
+            'totalMember'=> $totalMember
+        ]);
     }
 }
