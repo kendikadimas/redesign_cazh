@@ -7,7 +7,8 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
 } from '@/components/ui/navigation-menu';
-import { Link } from '@inertiajs/react';
+import { type SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 import React from 'react';
 
 const navLinks = [
@@ -19,11 +20,12 @@ const navLinks = [
 ];
 
 export function Navbar() {
+    const { auth } = usePage<SharedData>().props;
     return (
         <header className="w-full bg-primary top-0 px-15 pt-5">
             {/* 1. Jadikan <nav> sebagai container 'relative' */}
             <nav className="container relative mx-auto flex h-16 items-center justify-between px-10 md:px-6">
-                
+
                 {/* KIRI: Hanya Logo */}
                 <div className="flex-shrink-0">
                     <Link href={route('home')} className="flex items-center">
@@ -54,13 +56,29 @@ export function Navbar() {
 
                 {/* KANAN: Tombol Aksi */}
                 <div className="flex items-center gap-4">
-                    <Button
-                        variant="default"
-                        className="bg-[#"
-                    >
-                        Button
-                    </Button>
-                    <Button variant="secondary">Button</Button>
+                    {auth.user ? (
+                        <Link
+                            href={route('dashboard')}
+                            className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                        >
+                            Dashboard
+                        </Link>
+                    ) : (
+                        <>
+                            <Link
+                                href={route('login')}
+                                className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+                            >
+                                Log in
+                            </Link>
+                            <Link
+                                href={route('register')}
+                                className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                            >
+                                Register
+                            </Link>
+                        </>
+                    )}
                 </div>
 
             </nav>

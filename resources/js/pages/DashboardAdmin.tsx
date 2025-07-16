@@ -25,16 +25,16 @@ const ActivityItem = ({ icon, bgColor, text, time }) => (
 export default function DashboardAdmin({ auth }) {
     return (
         <AdminLayout>
-            <Head title="Dashboard" />
+            <Head title="Dashboard Admin" />
             <div className="flex flex-col flex-grow">
                 <header> {/* ... (Header tetap sama) ... */}</header>
                 <main className="flex-1 p-6 space-y-6">
                     {/* Kartu Statistik */}
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                        <StatCard title="Total Artikel" value="124" icon={<File className="h-5 w-5 text-blue-600"/>} iconBgClass="bg-blue-100" change="+20.1%" changeType="positive" />
-                        <StatCard title="Artikel Pending" value="5" icon={<Clock className="h-5 w-5 text-orange-600"/>} iconBgClass="bg-orange-100" />
-                        <StatCard title="Artikel Bulan Ini" value="28" icon={<BarChart2 className="h-5 w-5 text-green-600"/>} iconBgClass="bg-green-100" change="+12" changeType="positive" />
-                        <StatCard title="Total Member" value="67" icon={<Users className="h-5 w-5 text-purple-600"/>} iconBgClass="bg-purple-100" change="-2" changeType="negative" />
+                        <StatCard title="Total Artikel" value="{{ $totalartikel }}" icon={<File className="h-5 w-5 text-blue-600" />} iconBgClass="bg-blue-100" change="+20.1%" changeType="positive" />
+                        <StatCard title="Artikel Pending" value="5" icon={<Clock className="h-5 w-5 text-orange-600" />} iconBgClass="bg-orange-100" />
+                        <StatCard title="Artikel Bulan Ini" value="28" icon={<BarChart2 className="h-5 w-5 text-green-600" />} iconBgClass="bg-green-100" change="+12" changeType="positive" />
+                        <StatCard title="Total Member" value="67" icon={<Users className="h-5 w-5 text-purple-600" />} iconBgClass="bg-purple-100" change="-2" changeType="negative" />
                     </div>
 
                     {/* Layout Grid 2x2 untuk Chart dan Aktivitas */}
@@ -42,7 +42,7 @@ export default function DashboardAdmin({ auth }) {
                         <ArticleChart />
                         <CategoryPieChart />
                         <VisitsLineChart />
-                        
+
                         <Card>
                             <CardHeader><CardTitle>Aktivitas Terbaru</CardTitle></CardHeader>
                             <CardContent className="space-y-6">

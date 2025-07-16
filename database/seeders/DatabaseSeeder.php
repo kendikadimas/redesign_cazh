@@ -35,5 +35,9 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
             'role' => 'member',
         ]);
+
+        $this->call([
+            ArticleSeeder::class,
+        ]);
     }
 }
