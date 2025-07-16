@@ -22,13 +22,13 @@ import { ArticleSection } from '@/components/ui/article-section';
 
 const Index = () => {
     return (
-        <div className="flex flex-col items-center justify-center bg-[#00718F] p-4">
+        <div className="flex flex-col items-center justify-center bg-white">
             <Head title="Cards" />
             <Navbar />
             <Hero />
             <StatsSection />
-            <LogoCarousel />
             <FeaturesSection />
+            <LogoCarousel />
             <TabbedFeatures />
             <CardComparison />
             <ImageTextSection />

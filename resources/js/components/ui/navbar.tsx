@@ -20,9 +20,9 @@ const navLinks = [
 
 export function Navbar() {
     return (
-        <header className="w-full bg-[#00718F]">
+        <header className="w-full bg-primary top-0 px-15 pt-5">
             {/* 1. Jadikan <nav> sebagai container 'relative' */}
-            <nav className="container relative mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+            <nav className="container relative mx-auto flex h-16 items-center justify-between px-10 md:px-6">
                 
                 {/* KIRI: Hanya Logo */}
                 <div className="flex-shrink-0">

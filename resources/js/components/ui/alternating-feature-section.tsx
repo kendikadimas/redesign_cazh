@@ -34,14 +34,12 @@ const featureData = [
 ];
 
 export function AlternatingFeatureSection() {
-    // Menggabungkan semua kartu menjadi satu array untuk ditampilkan
     const allCards = featureData.flatMap(feature => feature.cards);
 
     return (
         <section className="py-16 lg:py-24 bg-white">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                    {/* Kolom Kiri: Judul-judul */}
                     <div className="space-y-12 lg:sticky lg:top-24">
                         {featureData.map((feature, index) => (
                             <div key={index}>

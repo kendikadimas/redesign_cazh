@@ -15,13 +15,11 @@ const logos = [
 
 export function LogoCarousel() {
     return (
-        <section className="w-full py-16 lg:py-24 bg-muted/40">
+        <section className="w-full py-16 lg:py-24 bg-primary px-15">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center mb-12">
-                    <SectionHeader
-                        title="Lorem Ipsum"
-                        description="Lebih dari 1000+ perusahaan telah mempercayai kami untuk kebutuhan mereka."
-                        />
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">Dipercaya oleh lebih dari 1000 Lembaga</h2>
+                    <p className="mx-auto max-w-[700px] text-white md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">Satu sistem terintegrasi, banyak solusi cerdas</p>
                 </div>
                 <div 
                     className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
