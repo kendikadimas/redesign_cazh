@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
         $user = $request->user();
 
         if ($user->role === 'member') {
-            return redirect()->route('blog');
+            return redirect()->route('mdashboard');
         }
 
         // Untuk admin & editor, arahkan ke intended URL atau dashboard

@@ -7,10 +7,14 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return Inertia::render('Index');
-})->name('home');
+})->name('landing page');
 
 Route::middleware(['auth', 'verified', 'role:admin,editor'])->group(function () {
-    Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('edashboard', [DashboardController::class, 'edashboard'])->name('edashboard');
+});
+
+Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
+    Route::get('mdashboard', [DashboardController::class, 'mdashboard'])->name('mdashboard');
 });
 
 Route::get('/management-articles', [ArticleController::class, 'kelola'])->name('kelolaartikel');

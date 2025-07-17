@@ -42,7 +42,7 @@ export function Sidebar() {
                 </NavLink>
             </nav>
             <div className="mt-auto p-4 border-t">
-                 <NavLink href={route('logout')} method="post" as="button">
+                <NavLink href={route('logout')} method="post" as="button">
                     <LogOut className="h-4 w-4" /> Logout
                 </NavLink>
             </div>
