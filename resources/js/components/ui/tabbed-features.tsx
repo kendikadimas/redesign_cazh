@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useState } from "react"
 import { SectionHeader } from "./section-header"
-import { GraduationCap, Users, UserPlus, Wallet, BarChart, MessageSquare, FileText, QrCode } from "lucide-react" // Import specific icons
+import { GraduationCap, Users, UserPlus, Wallet, BarChart, MessageSquare, FileText, QrCode } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion" // Import motion and AnimatePresence
 
 // Define the structure for each category and its sub-features
 const categories = {
@@ -46,7 +47,7 @@ const categories = {
       {
         title: "Multi-Metode Bayar",
         description: "Dukung berbagai metode pembayaran untuk kemudahan transaksi.",
-        icon: QrCode, // Reusing QrCode from previous section
+        icon: QrCode,
       },
     ],
   },
@@ -62,12 +63,12 @@ const categories = {
       {
         title: "Pengumuman Sekolah",
         description: "Sampaikan informasi dan pengumuman penting secara cepat dan merata.",
-        icon: FileText, // Reusing FileText
+        icon: FileText,
       },
       {
         title: "Konsultasi Online",
         description: "Fasilitasi sesi konsultasi antara guru dan orang tua melalui platform digital.",
-        icon: Users, // Reusing Users
+        icon: Users,
       },
     ],
   },
@@ -89,7 +90,7 @@ export function TabbedFeatures() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <SectionHeader
-            title="Fitur Lengkap Cards untuk Segala Kebutuhan Lembaga Pendidikan"
+            title="Banyak Fitur, Satu Sistem"
             description="" // Description is empty as per image
           />
         </div>
@@ -128,29 +129,50 @@ export function TabbedFeatures() {
           </ToggleGroupItem>
         </ToggleGroup>
 
-        {/* Main Content Card */}
-        <div className="w-full max-w-6xl bg-white p-8 lg:p-12 rounded-2xl border border-blue-200 shadow-xl relative">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 lg:mb-12 gap-6 lg:gap-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-primary lg:w-1/2 text-left">
-              {activeContent.mainTitle}
-            </h3>
-            <p className="text-lg text-muted-foreground lg:w-1/2 text-left">{activeContent.mainDescription}</p>
-          </div>
+        {/* Main Content Card with Animation */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory} // Key changes to trigger animation on content change
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="w-full max-w-6xl bg-white p-8 lg:p-12 rounded-2xl border border-blue-200 shadow-xl relative"
+          >
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 lg:mb-12 gap-6 lg:gap-12">
+              <h3 className="text-3xl md:text-4xl font-bold text-primary lg:w-1/2 text-left">
+                {activeContent.mainTitle}
+              </h3>
+              <p className="text-lg text-muted-foreground lg:w-1/2 text-left">{activeContent.mainDescription}</p>
+            </div>
 
-          {/* Sub-feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activeContent.subFeatures.map((feature, index) => (
-              <div key={index} className="bg-primary rounded-lg p-6 relative shadow-md">
-                {/* Icon at top-right */}
-                <div className="absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 p-3 bg-accent-orange rounded-md shadow-sm">
-                  <feature.icon className="h-6 w-6 text-white" />
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-2">{feature.title}</h4>
-                <p className="text-sm text-white/80">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+            {/* Sub-feature Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {activeContent.subFeatures.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }} // Staggered animation
+                  className="bg-primary rounded-lg p-6 relative shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group" // Added hover effects
+                >
+                  {/* Subtle gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary/70 rounded-lg" />
+                  {/* Icon at top-right */}
+                  <div className="absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 p-3 bg-accent-orange rounded-md shadow-sm z-10">
+                    <feature.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="relative z-10">
+                    {" "}
+                    {/* Ensure text is above gradient */}
+                    <h4 className="text-xl font-semibold text-white mb-2">{feature.title}</h4>
+                    <p className="text-sm text-white/80">{feature.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Action Button */}
         <Button size="lg" className="mt-12 bg-accent-orange hover:bg-accent-orange-dark text-white">

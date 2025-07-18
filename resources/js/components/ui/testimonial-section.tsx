@@ -29,9 +29,10 @@ const testimonials: TestimonialProps[] = [
 
 export function TestimonialsSection() {
     return (
-        <section className="py-16 lg:py-24 bg-primary">
+        <section className="py-10 lg:py-24 bg-primary px-15">
             <div className="container mx-auto px-4">
-                <SectionHeader
+                <SectionHeader 
+                    variant="white"
                     title="Apa Kata Mereka?"
                     description="Dengarkan pengalaman dari para pengguna yang telah merasakan manfaat dari platform kami."
                 />

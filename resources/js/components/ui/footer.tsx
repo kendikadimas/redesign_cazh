@@ -1,114 +1,114 @@
-import React from 'react';
-import { Link } from '@inertiajs/react';
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { Link } from "@inertiajs/react"
+import { MapPin, Phone, Mail, Instagram, Youtube, Music } from "lucide-react" // Import Lucide icons
+import { Separator } from "@/components/ui/separator"
 
-// Data untuk link agar mudah dikelola
-const productLinks = [
-    { href: "#", label: "Fitur" },
-    { href: "#", label: "Harga" },
-    { href: "#", label: "Integrasi" },
-    { href: "#", label: "Keamanan" },
-];
+// Data untuk link navigasi
+const navigationLinks = [
+  { href: "#", label: "Beranda" },
+  { href: "#", label: "Flexycazh" },
+  { href: "#", label: "Tentang" },
+  { href: "#", label: "Blog" },
+  { href: "#", label: "Kontak" },
+]
 
-const companyLinks = [
-    { href: "#", label: "Tentang Kami" },
-    { href: "#", label: "Karir" },
-    { href: "#", label: "Blog" },
-    { href: "#", label: "Hubungi Kami" },
-];
+// Data untuk quick links
+const quickLinks = [
+  { href: "#", label: "Company Profile" },
+  { href: "#", label: "Proposal" },
+  { href: "#", label: "Pendaftaran Partner" },
+]
 
-const resourceLinks = [
-    { href: "#", label: "Pusat Bantuan" },
-    { href: "#", label: "Dokumentasi API" },
-    { href: "#", label: "Status Layanan" },
-    { href: "#", label: "Syarat & Ketentuan" },
-];
+// Data untuk services links
+const servicesLinks = [
+  { href: "#", label: "FAQs" },
+  { href: "#", label: "Syarat" },
+  { href: "#", label: "Kebijakan" },
+  { href: "#", label: "404" },
+]
 
 export function Footer() {
-    return (
-        <footer className="bg-muted/40 text-foreground">
-            <div className="container mx-auto px-4 py-12 lg:py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    
-                    {/* Kolom 1: Info Perusahaan & Alamat */}
-                    <div className="space-y-4">
-                        <div className="w-32 h-12 bg-muted rounded-md flex items-center justify-center">
-                            <span className="text-sm font-semibold text-muted-foreground">Logo</span>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies.
-                        </p>
-                        <div className="flex items-start gap-3">
-                            <MapPin className="h-5 w-5 mt-1 text-muted-foreground flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">
-                                Jl. Teknologi No. 1, Jakarta, Indonesia
-                            </span>
-                        </div>
-                    </div>
+  return (
+    <footer className="bg-primary w-full text-white py-12 lg:py-16 px-15">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap items-start justify-between pb-8">
 
-                    {/* Kolom 2: Link Produk & Telepon */}
-                    <div className="space-y-4">
-                        <h4 className="font-bold">Lorem Ipsum</h4>
-                        <ul className="space-y-2">
-                            {productLinks.map(link => (
-                                <li key={link.label}>
-                                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="flex items-center gap-3 pt-2">
-                            <Phone className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">+62 21 1234 5678</span>
-                        </div>
-                    </div>
+          <div className="space-y-4">
+            <img src="/images/Cards.svg" alt="Cards Logo" width={150} height={40} />
+            <p className="text-lg font-light">Digitize School.</p>
+          </div>
 
-                    {/* Kolom 3: Link Perusahaan & Email */}
-                    <div className="space-y-4">
-                        <h4 className="font-bold">Lorem Ipsum</h4>
-                        <ul className="space-y-2">
-                            {companyLinks.map(link => (
-                                <li key={link.label}>
-                                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                         <div className="flex items-center gap-3 pt-2">
-                            <Mail className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">halo@namaapp.com</span>
-                        </div>
-                    </div>
+          <div>
+            <h4 className="font-bold text-lg mb-4">Navigation</h4>
+            <ul className="space-y-2">
+              {navigationLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-white hover:underline text-base">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                    {/* Kolom 4: Link Sumber Daya & Media Sosial */}
-                     <div className="space-y-4">
-                        <h4 className="font-bold">Lorem Ipsum</h4>
-                        <ul className="space-y-2">
-                            {resourceLinks.map(link => (
-                                <li key={link.label}>
-                                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                         <div className="flex items-center gap-4 pt-2">
-                            <Link href="#" className="text-muted-foreground hover:text-primary"><Facebook className="h-5 w-5"/></Link>
-                            <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter className="h-5 w-5"/></Link>
-                            <Link href="#" className="text-muted-foreground hover:text-primary"><Instagram className="h-5 w-5"/></Link>
-                        </div>
-                    </div>
-                </div>
+          {/* Column 3: Quick Link */}
+          <div>
+            <h4 className="font-bold text-lg mb-4">Quick Link</h4>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-white hover:underline text-base">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                <Separator className="my-8" />
-                
-                <div className="text-center text-sm text-muted-foreground">
-                    © {new Date().getFullYear()} CARDS Kartu Digital. All Rights Reserved.
-                </div>
+          {/* Column 4: Services */}
+          <div>
+            <h4 className="font-bold text-lg mb-4">Services</h4>
+            <ul className="space-y-2">
+              {servicesLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-white hover:underline text-base">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <Separator className="bg-white/30 my-8" />
+
+        {/* Middle section: Contact Info & Social Media */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 text-center md:text-left font-bold">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 flex-shrink-0" />
+              <span className="text-base">Graha Timur, Jl. Martadireja 1 No.Blok B2, Purwokerto Timur</span>
             </div>
-        </footer>
-    );
+            <div className="flex items-center gap-2">
+              <Phone className="h-5 w-5 flex-shrink-0" />
+              <span className="text-base">+62 811-255-170</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail className="h-5 w-5 flex-shrink-0" />
+              <span className="text-base">admin@cazh.id</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <img src="/images/Instagram.svg" alt="Instagram" width={20} height={20} />
+            <img src="/images/youtube.svg" alt="youtube" width={20} height={20} />
+            <img src="/images/tiktok.svg" alt="tiktok" width={20} height={20} />
+          </div>
+        </div>
+
+        <Separator className="bg-white/30 my-8" />
+
+        {/* Bottom section: Copyright */}
+        <div className="text-center text-sm text-white">© 2021-2025 CARDS Kartu Digital</div>
+      </div>
+    </footer>
+  )
 }

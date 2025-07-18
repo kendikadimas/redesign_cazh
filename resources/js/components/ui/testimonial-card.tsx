@@ -14,10 +14,10 @@ export interface TestimonialProps {
 
 export function TestimonialCard({ quote, name, title, avatarSrc, avatarFallback }: TestimonialProps) {
     return (
-        <Card className="bg-muted/50 border-none shadow-sm">
+        <Card className="bg-white border-none shadow-sm">
             <CardContent className="p-6 flex flex-col h-full">
-                <Quote className="w-8 h-8 text-muted-foreground mb-4" />
-                <p className="text-muted-foreground mb-6 flex-grow">"{quote}"</p>
+                <Quote className="w-6 h-6 text-black mb-4" />
+                <p className="text-black tetx-left mb-6 flex-grow">"{quote}"</p>
                 <div className="flex items-center gap-4">
                     <Avatar>
                         <AvatarImage src={avatarSrc} alt={name} />
@@ -25,7 +25,7 @@ export function TestimonialCard({ quote, name, title, avatarSrc, avatarFallback 
                     </Avatar>
                     <div>
                         <p className="font-semibold">{name}</p>
-                        <p className="text-sm text-muted-foreground">{title}</p>
+                        <p className="text-sm text-black">{title}</p>
                     </div>
                 </div>
             </CardContent>

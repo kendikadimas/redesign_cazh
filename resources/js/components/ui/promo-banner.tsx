@@ -12,17 +12,17 @@ import { SectionHeader } from '@/components/ui/section-header';
 const promoData = [
     {
         id: 1,
-        imageSrc: "https://via.placeholder.com/1200x400/818cf8/ffffff?text=Promo+1",
+        imageSrc: "/images/1.png",
         alt: "Promo Banner 1"
     },
     {
         id: 2,
-        imageSrc: "https://via.placeholder.com/1200x400/60a5fa/ffffff?text=Promo+2",
+        imageSrc: "/images/2.png",
         alt: "Promo Banner 2"
     },
     {
         id: 3,
-        imageSrc: "https://via.placeholder.com/1200x400/f472b6/ffffff?text=Promo+3",
+        imageSrc: "/images/2.png",
         alt: "Promo Banner 3"
     }
 ];
@@ -57,18 +57,19 @@ export function PromoBanner() {
     return (
         <section className="w-full py-16 lg:py-24 bg-muted/30">
             <div className="container mx-auto px-4">
-                <SectionHeader 
+                <SectionHeader
+                    variant='default'
                     title="Penawaran Spesial Untuk Anda"
                     description="Jangan lewatkan berbagai promo menarik yang sedang berlangsung."
                 />
 
-                <Carousel setApi={setApi} opts={{ loop: true }} className="w-full">
+                <Carousel setApi={setApi} opts={{ loop: true }} className="w-[80%] mx-auto ">
                     <CarouselContent>
                         {promoData.map((promo) => (
                             <CarouselItem key={promo.id}>
                                 <Card className="border-none bg-transparent">
                                     <CardContent className="flex aspect-[16/6] items-center justify-center p-0">
-                                        <img src={promo.imageSrc} alt={promo.alt} className="w-full h-full object-cover rounded-lg"/>
+                                        <img src={promo.imageSrc} alt={promo.alt} className="h-auto w-[60%] object-contain rounded-md"/>
                                     </CardContent>
                                 </Card>
                             </CarouselItem>

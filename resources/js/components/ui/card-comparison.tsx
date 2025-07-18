@@ -6,7 +6,7 @@ const cardProducts = [
   {
     id: "parents",
     name: "cards parents",
-    logo: "/placeholder.svg?height=50&width=150", // Using placeholder for now
+    logo: "/images/cards_parents_blue.png", // Ganti dengan path logo asli Anda
     uses: [
       "Manajemen data siswa dan guru",
       "Absensi digital terintegrasi",
@@ -18,7 +18,7 @@ const cardProducts = [
   {
     id: "school",
     name: "cards school",
-    logo: "/placeholder.svg?height=50&width=150",
+    logo: "/images/cards_school_blue.png",
     uses: [
       "Manajemen data siswa dan guru",
       "Absensi digital terintegrasi",
@@ -30,7 +30,7 @@ const cardProducts = [
   {
     id: "canteen",
     name: "cards canteen",
-    logo: "/placeholder.svg?height=50&width=150",
+    logo: "/images/cards_canteen_blue.png",
     uses: [
       "Manajemen data siswa dan guru",
       "Absensi digital terintegrasi",
@@ -42,7 +42,7 @@ const cardProducts = [
   {
     id: "edu",
     name: "cards edu",
-    logo: "/placeholder.svg?height=50&width=150",
+    logo: "/images/cards_edu_blue.png",
     uses: [
       "Manajemen data siswa dan guru",
       "Absensi digital terintegrasi",
@@ -64,23 +64,9 @@ export function CardComparison() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <SectionHeader
-            title="Digitalisasi Lembaga Dimulai dengan Sistem Cloud Canggih"
-            description="Data aman dengan kemudahan akses kapanpun melalui berbagai macam perangkat. Layanan berkualitas tinggi dengan banyak fitur tanpa investasi server dan pengembangan software."
+            title="Berbagai Jenis Cards, Sesuai Kebutuhan"
+            description="Dapatkan solusi yang sesuai dengan kebutuhan Anda dengan berbagai jenis kartu Cards."
           />
-        </div>
-
-        {/* Product Logos */}
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-16">
-          {cardProducts.map((product) => (
-            <img
-              key={product.id}
-              src={product.logo || "/placeholder.svg"}
-              alt={product.name}
-              width={150}
-              height={50}
-              className="h-auto max-w-[150px]"
-            />
-          ))}
         </div>
 
         {/* Comparison Cards Grid */}
@@ -88,13 +74,22 @@ export function CardComparison() {
           {cardProducts.map((card) => (
             <Card
               key={card.id}
-              className="flex flex-col border border-blue-200 rounded-xl overflow-hidden shadow-lg relative min-h-[380px] group" // Added relative, min-h, and group class
+              className="flex flex-col border border-blue-200 rounded-xl overflow-hidden shadow-lg relative min-h-[450px] group" // Increased min-h to accommodate logo
             >
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-blue-100 opacity-50" />
               <div className="relative z-10 flex flex-col h-full p-6 pb-12">
-                {" "}
-                {/* Adjusted padding-bottom */}
+                <div className="flex justify-center mb-6">
+                  {" "}
+                  {/* Centered logo */}
+                  <img
+                    src={card.logo || "/placeholder.svg"}
+                    alt={card.name}
+                    width={150}
+                    height={50}
+                    className="h-auto max-w-[150px]"
+                  />
+                </div>
                 <CardHeader className="px-0 pt-0 pb-4">
                   <CardTitle className="text-xl font-bold text-primary mb-2">Kegunaan</CardTitle>
                   <ul className="space-y-1 text-sm text-primary">
@@ -104,8 +99,6 @@ export function CardComparison() {
                   </ul>
                 </CardHeader>
                 <CardContent className="px-0 pt-4 pb-6 flex-grow">
-                  {" "}
-                  {/* Added flex-grow */}
                   <CardTitle className="text-xl font-bold text-primary mb-2">Fitur</CardTitle>
                   <ul className="space-y-1 text-sm text-primary">
                     {card.features.map((feature, index) => (
