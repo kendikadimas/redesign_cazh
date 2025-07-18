@@ -14,8 +14,15 @@ Route::get('flexy-cazh', function () {
 })->name('flexycazh');
 
 // Rute untuk Admin dan Editor
-Route::middleware(['auth', 'verified', 'role:admin,editor'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    Route::get('adashboard', [DashboardController::class, 'adashboard'])->name('adashboard');
+});
+
+Route::middleware(['auth', 'verified', 'role:editor'])->group(function () {
     Route::get('edashboard', [DashboardController::class, 'edashboard'])->name('edashboard');
+});
+
+Route::middleware(['auth', 'verified', 'role:admin,editor'])->group(function () {
     // Tambahkan rute lain yang hanya bisa diakses admin/editor di sini
     Route::get('/management-articles', [ArticleController::class, 'kelola'])->name('kelolaartikel');
     Route::get('/articles', [ArticleController::class, 'manageArticles'])->name('articles.index');

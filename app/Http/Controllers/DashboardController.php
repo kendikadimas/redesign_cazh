@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $totalMember = User::count();
 
         return Inertia::render(
-            'DashboardAdmin',
+            'DashboardEditor',
             [
                 'totalartikel' => $totalartikel,
                 'artikelpending' => $artikelpending,
@@ -37,6 +37,6 @@ class DashboardController extends Controller
 
     public function mdashboard()
     {
-        return Inertia::render('dashboard');
+        return Inertia::render('DashboardMember');
     }
 }
