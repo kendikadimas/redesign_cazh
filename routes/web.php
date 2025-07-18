@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BanpromController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
@@ -17,12 +18,21 @@ Route::get('flexy-cazh', function () {
 // Rute untuk Admin dan Editor
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('adashboard', [DashboardController::class, 'adashboard'])->name('adashboard');
-    // route banner promosi
-    Route::get('/management-banprom', [BanpromController::class, 'kelola'])->name('kelolabanprom');
+
+    // Route Banner Promosi
     Route::get('/banprom', [BanpromController::class, 'managebanprom'])->name('banprom.index');
     Route::get('/banprom/{banprom}/review', [BanpromController::class, 'reviewbanprom'])->name('banprom.review');
     Route::post('/banprom/{banprom}/publish', [BanpromController::class, 'publishbanprom'])->name('banprom.publish');
     Route::post('/banprom/{banprom}/reject', [BanpromController::class, 'rejectbanprom'])->name('banprom.reject');
+
+    // Route Manajemen Kategori
+    Route::resource('kategori', KategoriController::class)->except(['create', 'show', 'edit']);
+
+    // Route Manajemen Pengguna
+    Route::get('/users', [DashboardController::class, 'usersIndex'])->name('users.index');
+    Route::get('/users/{user}', [DashboardController::class, 'usersShow'])->name('users.show');
+    Route::patch('/users/{user}', [DashboardController::class, 'usersUpdate'])->name('users.update');
+    Route::delete('/users/{user}', [DashboardController::class, 'usersDestroy'])->name('users.destroy');
 });
 
 Route::middleware(['auth', 'verified', 'role:editor'])->group(function () {
@@ -30,26 +40,19 @@ Route::middleware(['auth', 'verified', 'role:editor'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'role:admin,editor'])->group(function () {
-    // Tambahkan rute lain yang hanya bisa diakses admin/editor di sini
-    Route::get('/management-articles', [ArticleController::class, 'kelola'])->name('kelolaartikel');
-    Route::get('/articles', [ArticleController::class, 'manageArticles'])->name('articles.index');
+    // Route Manajemen Artikel (Review & Approval)
+    Route::get('/articles/manage', [ArticleController::class, 'manageArticles'])->name('articles.manage');
     Route::get('/articles/{article}/review', [ArticleController::class, 'reviewArticle'])->name('articles.review');
     Route::post('/articles/{article}/publish', [ArticleController::class, 'publishArticle'])->name('articles.publish');
     Route::post('/articles/{article}/reject', [ArticleController::class, 'rejectArticle'])->name('articles.reject');
+    // Route CRUD Artikel
+    Route::resource('articles', ArticleController::class);
 });
 
 // Rute untuk Member
 Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
     Route::get('mdashboard', [DashboardController::class, 'mdashboard'])->name('mdashboard');
 });
-
-// Rute yang bisa diakses publik atau oleh semua role (jika tidak ada middleware role)
-// Pastikan rute ini tidak tumpang tindih dengan rute yang dilindungi role di atas
-// Route::get('/management-articles', [ArticleController::class, 'kelola'])->name('kelolaartikel'); // Dipindahkan ke grup admin/editor
-// Route::get('/articles', [ArticleController::class, 'manageArticles'])->name('articles.index'); // Dipindahkan ke grup admin/editor
-// Route::get('/articles/{article}/review', [ArticleController::class, 'reviewArticle'])->name('articles.review'); // Dipindahkan ke grup admin/editor
-// Route::post('/articles/{article}/publish', [ArticleController::class, 'publishArticle'])->name('articles.publish'); // Dipindahkan ke grup admin/editor
-// Route::post('/articles/{article}/reject', [ArticleController::class, 'rejectArticle'])->name('articles.reject'); // Dipindahkan ke grup admin/editor
 
 
 require __DIR__ . '/settings.php';
