@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Models\article;
+use App\Models\Article;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,9 +18,9 @@ class DashboardController extends Controller
      */
     public function edashboard()
     {
-        $totalartikel = article::count();
-        $artikelpending = article::where('status', 'pending')->count();
-        $artikelthismonth = article::whereMonth('created_at', Carbon::now()->month)
+        $totalartikel = Article::count();
+        $artikelpending = Article::where('status', 'pending')->count();
+        $artikelthismonth = Article::whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)->count();
         $totalMember = User::count();
 
