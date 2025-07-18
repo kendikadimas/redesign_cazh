@@ -14,16 +14,6 @@ class BanpromController extends Controller
      */
     public function kelola()
     {
-        // Logika ini sama dengan managebanprom untuk menampilkan halaman utama manajemen
-        return $this->managebanprom();
-    }
-
-    /**
-     * Menampilkan daftar semua banner promosi untuk manajemen.
-     * Sesuai dengan route 'banprom.index'.
-     */
-    public function managebanprom()
-    {
         // Asumsi model Banprom memiliki relasi 'user'
         $banproms = Banprom::with('user')
             ->orderBy('created_at', 'desc')
