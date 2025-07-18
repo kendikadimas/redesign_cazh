@@ -1,4 +1,6 @@
-// resources/js/components/Navbar.tsx
+"use client"
+
+import type React from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -7,15 +9,33 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import type { SharedData } from "@/types"
-import { Link, usePage } from "@inertiajs/react"
+import { Link, usePage, router } from "@inertiajs/react" // Import router
+
+// Pastikan fungsi `route` dari Ziggy tersedia secara global
+declare const route: (...args: any[]) => string
 
 const navLinks = [
   { href: "/", label: "Beranda" },
   { href: "#", label: "Flexycazh" },
   { href: "#", label: "Tentang" },
-  { href: "#", label: "Blog" },
-  { href: "#", label: "Kontak" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Kontak" },
+]
+
+const memberNavLinks = [
+  { href: "/mdashboard", label: "Dashboard" },
+  { href: "/member/analytics", label: "Analytics" },
+  { href: "/member/articles", label: "Artikel" },
 ]
 
 export function Navbar() {
@@ -31,6 +51,13 @@ export function Navbar() {
     }
   }
 
+  const currentNavLinks = auth.user && auth.user.role === "member" ? memberNavLinks : navLinks
+
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault()
+    router.post(route("logout"))
+  }
+
   return (
     <header className="w-full bg-primary top-0 px-15 pt-5">
       <nav className="container relative mx-auto flex h-16 items-center justify-between px-10 md:px-6">
@@ -41,11 +68,12 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* TENGAH: Menu Navigasi (Diposisikan secara Absolut) */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <NavigationMenu className="hidden md:flex">
+        {/* TENGAH: Menu Navigasi */}
+        {/* Div ini akan mengambil ruang yang tersedia dan memusatkan kontennya */}
+        <div className="flex-grow hidden md:flex justify-center">
+          <NavigationMenu>
             <NavigationMenuList className="gap-2">
-              {navLinks.map((link) => (
+              {currentNavLinks.map((link) => (
                 <NavigationMenuItem key={link.label}>
                   <NavigationMenuLink asChild>
                     <Link
@@ -61,17 +89,36 @@ export function Navbar() {
           </NavigationMenu>
         </div>
 
-        {/* KANAN: Tombol Aksi */}
+        {/* KANAN: Tombol Aksi (Login/Register atau Dropdown Profil) */}
         <div className="flex items-center gap-4">
           {auth.user ? (
-            <Button
-              asChild
-              variant="secondary"
-              href={dashboardHref} // Menggunakan href yang ditentukan berdasarkan role
-              className="px-5 py-1.5 text-sm"
-            >
-              <Link>Dashboard</Link>
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+                  <Avatar className="h-9 w-9">
+                    <AvatarImage
+                      src={auth.user.profile_image || "/placeholder.svg?height=40&width=40"}
+                      alt={auth.user.name}
+                    />
+                    <AvatarFallback>{auth.user.name.charAt(0).toUpperCase()}</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">{auth.user.name}</p>
+                    <p className="text-xs leading-none text-muted-foreground">{auth.user.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href={dashboardHref}>Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>Log out</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <>
               <Button asChild variant="outline" href="/login" className="px-5 py-1.5 text-sm bg-transparent">

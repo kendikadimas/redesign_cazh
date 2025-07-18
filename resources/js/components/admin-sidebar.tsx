@@ -2,9 +2,10 @@
 
 import type React from "react"
 
-import { Link } from "@inertiajs/react" // Assuming Inertia.js context for Link
+import { Link, router } from "@inertiajs/react" // Assuming Inertia.js context for Link
 import { cn } from "@/lib/utils"
-import { LayoutDashboard, FileText, Users, Folder, Megaphone, Settings, ChevronRight } from "lucide-react"
+import { LayoutDashboard, FileText, Users, Folder, Megaphone, Settings, ChevronRight, LogOut } from "lucide-react"
+import { Button } from "./ui/button"
 
 // NavLink component for sidebar items
 interface NavLinkProps {
@@ -32,7 +33,13 @@ const NavLink: React.FC<NavLinkProps> = ({ href, active, children, badge }) => (
 )
 
 export function SuperAdminSidebar() {
-  // Dummy active state for navigation
+  
+    const handleLogout = (e: React.MouseEvent) => {
+        e.preventDefault()
+        router.post("/logout")
+        }
+  
+    // Dummy active state for navigation
   const currentRoute = "dashboard" // Replace with actual route logic if needed
 
   return (
@@ -53,22 +60,23 @@ export function SuperAdminSidebar() {
         <NavLink href="/users" active={currentRoute === "users"}>
           <Users className="h-4 w-4" /> Pengguna
         </NavLink>
-        <NavLink href="/category" active={currentRoute === "categories"}>
-          <Folder className="h-4 w-4" /> File
+        <NavLink href="/categories" active={currentRoute === "categories"}>
+          <Folder className="h-4 w-4" /> Kategori
         </NavLink>
-        <NavLink href="#" active={currentRoute === "marketing"}>
-          <Megaphone className="h-4 w-4" /> Marketing
+        <NavLink href="/banners" active={currentRoute === "marketing"}>
+          <Megaphone className="h-4 w-4" /> Banner Promosi
         </NavLink>
-        <NavLink href="#" active={currentRoute === "settings"}>
+        {/* <NavLink href="#" active={currentRoute === "settings"}>
           <Settings className="h-4 w-4" /> Pengaturan
-        </NavLink>
+        </NavLink> */}
       </nav>
       <div className="mt-auto p-4 border-t">
-        <Link href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-primary-foreground/80">
-          <img src="/placeholder.svg?height=24&width=24" alt="PDF Icon" width={24} height={24} />{" "}
-          {/* Placeholder for red PDF icon */}
-          <span className="sr-only">PDF Icon</span>
-        </Link>
+        <Button
+          onClick={handleLogout}
+          className="w-full justify-start text-white hover:bg-white hover:text-[#00718F]"
+        >
+          <LogOut className="mr-2 h-4 w-4" /> Logout
+        </Button>
       </div>
     </aside>
   )

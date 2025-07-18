@@ -1,12 +1,16 @@
 import type React from "react"
 import { SuperAdminSidebar } from "@/components/admin-sidebar"
+import { router } from "@inertiajs/react"
 
 interface SuperAdminLayoutProps {
   children: React.ReactNode
 }
 
 export default function SuperAdminLayout({ children }: SuperAdminLayoutProps) {
-  return (
+     
+    
+  
+    return (
     <div className="flex min-h-screen w-full bg-gray-100">
       <SuperAdminSidebar />
       <div className="flex flex-col flex-1">

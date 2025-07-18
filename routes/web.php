@@ -20,11 +20,17 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('adashboard', [DashboardController::class, 'adashboard'])->name('adashboard');
 
     // Route Banner Promosi
+    Route::get('/management-banprom', [BanpromController::class, 'kelola'])->name('kelolabanprom');
     Route::get('/banprom', [BanpromController::class, 'managebanprom'])->name('banprom.index');
     Route::get('/banprom/{banprom}/review', [BanpromController::class, 'reviewbanprom'])->name('banprom.review');
     Route::post('/banprom/{banprom}/publish', [BanpromController::class, 'publishbanprom'])->name('banprom.publish');
     Route::post('/banprom/{banprom}/reject', [BanpromController::class, 'rejectbanprom'])->name('banprom.reject');
-
+    Route::get('/banners', function () {
+        return Inertia::render('Admin/Banner/Index'); // Sesuaikan path jika berbeda
+    })->name('banners.index');
+    Route::get('/categories', function () {
+      return Inertia::render('Admin/Category/Index'); // Sesuaikan path jika berbeda
+    })->name('categories.index');
     // Route Manajemen Kategori
     Route::resource('kategori', KategoriController::class)->except(['create', 'show', 'edit']);
 
@@ -52,6 +58,29 @@ Route::middleware(['auth', 'verified', 'role:admin,editor'])->group(function () 
 // Rute untuk Member
 Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
     Route::get('mdashboard', [DashboardController::class, 'mdashboard'])->name('mdashboard');
+
+
+    
+// Rute untuk Member
+Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
+    Route::get('mdashboard', [DashboardController::class, 'mdashboard'])->name('mdashboard');
+    
+    Route::get('member/analytics', function () {
+        return Inertia::render('Member/Analytics'); // Sesuaikan path jika berbeda
+    })->name('member.analytics');
+
+    Route::get('member/articles', function () {
+        return Inertia::render('Member/Article'); // Sesuaikan path jika berbeda
+    })->name('member.articles');
+
+    Route::get('member/articles/upload', function () {
+        return Inertia::render('Member/Articles/Upload'); // Sesuaikan path jika berbeda
+    })->name('member.articles.upload');
+
+
+});
+
+
 });
 
 

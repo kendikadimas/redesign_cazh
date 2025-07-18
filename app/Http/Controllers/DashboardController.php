@@ -42,7 +42,7 @@ class DashboardController extends Controller
      */
     public function mdashboard()
     {
-        return Inertia::render('DashboardMember');
+        return Inertia::render('Member/Index');
     }
 
     /**
