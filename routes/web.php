@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BanpromController;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
@@ -16,6 +17,12 @@ Route::get('flexy-cazh', function () {
 // Rute untuk Admin dan Editor
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('adashboard', [DashboardController::class, 'adashboard'])->name('adashboard');
+    // route banner promosi
+    Route::get('/management-banprom', [BanpromController::class, 'kelola'])->name('kelolabanprom');
+    Route::get('/banprom', [BanpromController::class, 'managebanprom'])->name('banprom.index');
+    Route::get('/banprom/{banprom}/review', [BanpromController::class, 'reviewbanprom'])->name('banprom.review');
+    Route::post('/banprom/{banprom}/publish', [BanpromController::class, 'publishbanprom'])->name('banprom.publish');
+    Route::post('/banprom/{banprom}/reject', [BanpromController::class, 'rejectbanprom'])->name('banprom.reject');
 });
 
 Route::middleware(['auth', 'verified', 'role:editor'])->group(function () {
